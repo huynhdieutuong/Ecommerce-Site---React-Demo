@@ -11,6 +11,8 @@ import {
   NavLink,
   } from 'reactstrap';
 
+import { CartContext } from '../contexts/Cart';
+
 class TopMenu extends Component {
   constructor(props) {
     super(props);
@@ -30,7 +32,7 @@ class TopMenu extends Component {
       <div>
         <Navbar color="light" light expand="md">
           <NavbarBrand>
-            <Link to="/">reactstrap</Link>
+            <Link to="/">HateStore</Link>
           </NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           <Collapse isOpen={this.state.isOpen} navbar>
@@ -43,6 +45,13 @@ class TopMenu extends Component {
               <NavItem>
                 <NavLink>
                   <Link to="/products/">Products</Link>
+                </NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink>
+                  <CartContext.Consumer>
+                    { ({ cartItems }) => <Link to="/cart/">Cart ({cartItems.length})</Link>}
+                  </CartContext.Consumer>
                 </NavLink>
               </NavItem>
             </Nav>
